@@ -10,7 +10,7 @@ import (
 	"github.com/moshen/gotermimg/terminal"
 )
 
-type Converter func(image.Image) []string
+type Converter func(image.Image, Transformer) []string
 
 const (
 	space  = " "
@@ -20,8 +20,13 @@ const (
 )
 
 // Converts image.Image img to a []string of 256 color terminal compatbile
-// ANSI using 2 spaces as a "pixel"
-func ANSI(img image.Image) []string {
+// ANSI using 2 spaces as a "pixel".  Applies Transformer trans to img
+// before conversion
+func ANSI(img image.Image, trans Transformer) []string {
+	if trans != nil {
+		img = trans(img)
+	}
+
 	bounds := img.Bounds()
 	termimg := make([]string, bounds.Dy(), bounds.Dy())
 
@@ -58,8 +63,13 @@ func ANSI(img image.Image) []string {
 }
 
 // Converts image.Image img to a []string of 256 color terminal compatbile
-// UTF8 using UTF8 1/2 blocks as a "pixel"
-func UTF8(img image.Image) []string {
+// UTF8 using UTF8 1/2 blocks as a "pixel".  Applies Transformer trans to img
+// before conversion
+func UTF8(img image.Image, trans Transformer) []string {
+	if trans != nil {
+		img = trans(img)
+	}
+
 	bounds := img.Bounds()
 	termimg := make([]string, (bounds.Dy()/2)+1, (bounds.Dy()/2)+1)
 	rownum := 0
@@ -95,9 +105,9 @@ func UTF8(img image.Image) []string {
 	return termimg
 }
 
-// Prints image.Image img to os.Stdout using Converter conv
-func PrintImage(img image.Image, conv Converter) {
-	for _, v := range conv(img) {
+// Prints image.Image img to os.Stdout using Converter with Transformer trans
+func PrintImage(img image.Image, conv Converter, trans Transformer) {
+	for _, v := range conv(img, trans) {
 		fmt.Println(v)
 	}
 }

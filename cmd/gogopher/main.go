@@ -62,5 +62,5 @@ Prints a looping animation of the Go gopher looking shifty!
 		conv = timg.ANSI
 	}
 
-	timg.PrintAnimation(timg.Gif(gifimg, conv))
+	timg.PrintAnimation(timg.Gif(gifimg, conv, nil))
 }

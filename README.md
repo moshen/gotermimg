@@ -18,11 +18,19 @@ Installs the `gotermimg` and `gogopher` command line applications.
 
 ## Usage
 
-### gogotermimg
+### gotermimg
 
-    Usage: gotermimg [-u] IMAGEFILE
+    Usage: gotermimg [-u|-x=n|-y=n] IMAGEFILE
       IMAGEFILE - png, gif or jpg.  gif will auto-play
       -u=false: Enable UTF8 output
+      -x=0: Scale to n*2 columns wide in ANSI mode, n columns wide in UTF8 mode.
+            When -x=0 (the default), aspect ratio is maintained.
+            For example if -x is provided without -y, height is scaled to
+            maintain aspect ratio
+      -y=0: Scale to n rows high in ANSI mode, n/2 rows high in UTF8 mode.
+            When -y=0 (the default), aspect ratio is maintained.
+            For example if -y is provided without -x, width is scaled to
+            maintain aspect ratio
 
 [![gotermimg on a png with transparency](http://fat.gfycat.com/AbsoluteShockingHerring.gif)](http://gfycat.com/AbsoluteShockingHerring)
 
@@ -40,12 +48,19 @@ Installs the `gotermimg` and `gogopher` command line applications.
 
 [Colin Kennedy](https://github.com/moshen)
 
+### vendor/resize
+
+[Jan Schlicht](https://github.com/nfnt/resize)
+
 ## License
 
 [MIT](http://colken.mit-license.org/)
-, See LICENSE file
+(unless otherwise noted), See LICENSE file
 
 The Go gopher was designed by Renee French. (http://reneefrench.blogspot.com/)
 The design is licensed under the Creative Commons 3.0 Attributions license.
 Read this article for more details: http://blog.golang.org/gopher
 
+### vendor/resize
+
+[MIT Style](https://github.com/moshen/gotermimg/blob/master/vendor/resize/LICENSE)

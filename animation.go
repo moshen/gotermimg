@@ -18,11 +18,11 @@ type Animation []Frame
 
 // Converts *git.GIF g to an Animation using Converter conv
 // Currently assumes all gif frames are the same size
-func Gif(g *gif.GIF, conv Converter) Animation {
+func Gif(g *gif.GIF, conv Converter, trans Transformer) Animation {
 	giflen := len(g.Image)
 	ani := make(Animation, giflen, giflen)
 	for i, v := range g.Image {
-		ani[i] = Frame{conv(v), time.Duration(g.Delay[i]) * 10 * time.Millisecond}
+		ani[i] = Frame{conv(v, trans), time.Duration(g.Delay[i]) * 10 * time.Millisecond}
 	}
 
 	return ani
