@@ -1,6 +1,7 @@
 SHELL := /usr/bin/env bash
 PROJ := github.com/moshen/gotermimg
 ALL := gotermimg gogopher
+SUBP := $(shell ls -d -1 */ | grep -v vendor | paste -sd ',' -)
 SAFERM := saferm () { for f in "$$@"; do ([[ -e "$$f" ]] && rm "$$f"); done; return 0; }; saferm
 
 all: $(ALL) 
@@ -16,4 +17,4 @@ clean:
 	$(SAFERM) $(ALL)
 
 fmt:
-	go fmt $(PROJ)/...
+	go fmt $(PROJ)/ $(PROJ)/{$(SUBP)}...
