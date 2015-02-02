@@ -21,16 +21,19 @@ Installs the `gotermimg` and `gogopher` command line applications.
 ### gotermimg
 
     Usage: gotermimg [-u|-x=n|-y=n] [IMAGEFILE]
-      IMAGEFILE - png, gif or jpg.  gif will auto-play
-      Image data can be piped to stdin instead of providing IMAGEFILE
+      IMAGEFILE - png, gif or jpg.  gif will auto-play.
+      Image data can be piped to stdin instead of providing IMAGEFILE.
+      If neither -x or -y are provided, and the image is larger than your current
+      terminal, it will be automatically scaled to fit.
+    
       -u=false: Enable UTF8 output
       -x=0: Scale to n*2 columns wide in ANSI mode, n columns wide in UTF8 mode.
             When -x=0 (the default), aspect ratio is maintained.
-            For example if -x is provided without -y, height is scaled to
+            For example if -y is provided without -x, width is scaled to
             maintain aspect ratio
       -y=0: Scale to n rows high in ANSI mode, n/2 rows high in UTF8 mode.
             When -y=0 (the default), aspect ratio is maintained.
-            For example if -y is provided without -x, width is scaled to
+            For example if -x is provided without -y, height is scaled to
             maintain aspect ratio
 
 [![gotermimg on a png with transparency](http://fat.gfycat.com/AbsoluteShockingHerring.gif)](http://gfycat.com/AbsoluteShockingHerring)

@@ -6,6 +6,8 @@ package terminal
 import (
 	"fmt"
 	"image/color"
+	"syscall"
+	"unsafe"
 )
 
 type ColorCode uint8
@@ -46,4 +48,22 @@ func FindColorCode(c color.Color) ColorCode {
 	} else {
 		return ColorLookup[TermPalette.Index(c)]
 	}
+}
+
+type winsize struct {
+	rows    uint16
+	cols    uint16
+	xpixels uint16
+	ypixels uint16
+}
+
+// Returns the size of the tty referenced by the provided file descriptor
+func Size(fd uintptr) (uint, uint, error) {
+	var sz winsize
+	_, _, err := syscall.Syscall(syscall.SYS_IOCTL,
+		fd, uintptr(syscall.TIOCGWINSZ), uintptr(unsafe.Pointer(&sz)))
+	if err != 0 {
+		return 0, 0, err
+	}
+	return uint(sz.cols), uint(sz.rows), nil
 }
