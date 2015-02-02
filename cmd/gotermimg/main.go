@@ -1,16 +1,19 @@
 package main
 
 import (
+	"bytes"
 	"flag"
 	"fmt"
 	"image"
 	"image/gif"
 	_ "image/jpeg"
 	_ "image/png"
+	"io/ioutil"
 	"log"
 	"os"
 
 	timg "github.com/moshen/gotermimg"
+	"github.com/moshen/gotermimg/vendor/termutil"
 )
 
 func main() {
@@ -25,30 +28,44 @@ func main() {
         maintain aspect ratio`)
 
 	flag.Usage = func() {
-		fmt.Fprint(os.Stderr, `Usage: gotermimg [-u|-x=n|-y=n] IMAGEFILE
+		fmt.Fprint(os.Stderr, `Usage: gotermimg [-u|-x=n|-y=n] [IMAGEFILE]
   IMAGEFILE - png, gif or jpg.  gif will auto-play
+  Image data can be piped to stdin instead of providing IMAGEFILE
 `)
 		flag.PrintDefaults()
 	}
 
 	flag.Parse()
 
-	if len(flag.Args()) < 1 {
+	var buf *bytes.Reader
+	switch {
+	case !termutil.Isatty(os.Stdin.Fd()):
+		bufData, err := ioutil.ReadAll(os.Stdin)
+		if err != nil {
+			log.Fatal(err)
+		}
+		buf = bytes.NewReader(bufData)
+	case len(flag.Args()) < 1:
 		flag.Usage()
 		os.Exit(1)
+	default:
+		file, err := os.Open(flag.Arg(0))
+		if err != nil {
+			log.Fatal(err)
+		}
+		bufData, err := ioutil.ReadAll(file)
+		if err != nil {
+			log.Fatal(err)
+		}
+		file.Close()
+		buf = bytes.NewReader(bufData)
 	}
 
-	file, err := os.Open(flag.Arg(0))
+	_, imgformat, err := image.DecodeConfig(buf)
 	if err != nil {
 		log.Fatal(err)
 	}
-	defer file.Close()
-
-	_, imgformat, err := image.DecodeConfig(file)
-	if err != nil {
-		log.Fatal(err)
-	}
-	file.Seek(0, 0)
+	buf.Seek(0, 0)
 
 	var conv timg.Converter
 	if *isUTF8 {
@@ -63,7 +80,7 @@ func main() {
 	}
 
 	if imgformat == "gif" {
-		gifimg, err := gif.DecodeAll(file)
+		gifimg, err := gif.DecodeAll(buf)
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -74,7 +91,7 @@ func main() {
 			timg.PrintImage(gifimg.Image[0], conv, trans)
 		}
 	} else {
-		img, _, err := image.Decode(file)
+		img, _, err := image.Decode(buf)
 		if err != nil {
 			log.Fatal(err)
 		}

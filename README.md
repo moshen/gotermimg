@@ -20,8 +20,9 @@ Installs the `gotermimg` and `gogopher` command line applications.
 
 ### gotermimg
 
-    Usage: gotermimg [-u|-x=n|-y=n] IMAGEFILE
+    Usage: gotermimg [-u|-x=n|-y=n] [IMAGEFILE]
       IMAGEFILE - png, gif or jpg.  gif will auto-play
+      Image data can be piped to stdin instead of providing IMAGEFILE
       -u=false: Enable UTF8 output
       -x=0: Scale to n*2 columns wide in ANSI mode, n columns wide in UTF8 mode.
             When -x=0 (the default), aspect ratio is maintained.
@@ -52,6 +53,10 @@ Installs the `gotermimg` and `gogopher` command line applications.
 
 [Jan Schlicht](https://github.com/nfnt/resize)
 
+### vendor/termutil
+
+[Andrew](https://github.com/andrew-d/go-termutil)
+
 ## License
 
 [MIT](http://colken.mit-license.org/)
@@ -64,3 +69,7 @@ Read this article for more details: http://blog.golang.org/gopher
 ### vendor/resize
 
 [MIT Style](https://github.com/moshen/gotermimg/blob/master/vendor/resize/LICENSE)
+
+### vendor/termutil
+
+[MIT](https://github.com/moshen/gotermimg/blob/master/vendor/termutil/LICENSE)
