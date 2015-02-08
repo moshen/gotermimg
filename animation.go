@@ -28,9 +28,43 @@ func Gif(g *gif.GIF, conv Converter, trans Transformer) Animation {
 	return ani
 }
 
+type KeepLooping func() bool
+
+// Returns true until n calls have been made
+func LoopTimes(n uint) KeepLooping {
+	loopCount := uint(0)
+	return func() bool {
+		switch {
+		case n == 0:
+			return true
+		case loopCount+1 >= n:
+			return false
+		default:
+			loopCount++
+			return true
+		}
+	}
+}
+
+// Returns true until s seconds have elapsed
+func LoopSeconds(s uint) KeepLooping {
+	var c <-chan time.Time
+	return func() bool {
+		if c == nil {
+			c = time.After(time.Duration(s) * time.Second)
+		}
+		select {
+		case <-c:
+			return false
+		default:
+			return true
+		}
+	}
+}
+
 // Prints Animation ani to os.Stdout after clearing the terminal
-// Does not return!  Loops indefinately
-func PrintAnimation(ani Animation) {
+// Does not return unless loop() returns false
+func PrintAnimation(ani Animation, loop KeepLooping) {
 	fmt.Print(terminal.Clear)
 	for {
 		for _, f := range ani {
@@ -39,6 +73,9 @@ func PrintAnimation(ani Animation) {
 				fmt.Println(v)
 			}
 			time.Sleep(f.Delay)
+		}
+		if loop != nil && !loop() {
+			break
 		}
 	}
 }

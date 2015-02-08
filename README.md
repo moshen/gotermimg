@@ -20,12 +20,19 @@ Installs the `gotermimg` and `gogopher` command line applications.
 
 ### gotermimg
 
-    Usage: gotermimg [-u|-x=n|-y=n] [IMAGEFILE]
+    Usage: gotermimg [-u] [-x=n] [-y=n] [-l=n|-s=n] [IMAGEFILE]
       IMAGEFILE - png, gif or jpg.  gif will auto-play.
       Image data can be piped to stdin instead of providing IMAGEFILE.
+
       If neither -x or -y are provided, and the image is larger than your current
       terminal, it will be automatically scaled to fit.
-    
+
+      -l=0: Loop animation n times
+            When -l=0 (the default), animation is looped indefinitely. Supersedes -s
+            Only applies to multi-frame gifs
+      -s=0: Loop animation n seconds
+            When -s=0 (the default), this option is ignored.
+            Only applies to multi-frame gifs
       -u=false: Enable UTF8 output
       -x=0: Scale to n*2 columns wide in ANSI mode, n columns wide in UTF8 mode.
             When -x=0 (the default), aspect ratio is maintained.

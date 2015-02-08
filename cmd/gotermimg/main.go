@@ -27,11 +27,18 @@ func main() {
         When -y=0 (the default), aspect ratio is maintained.
         For example if -x is provided without -y, height is scaled to
         maintain aspect ratio`)
+	loopTimes := flag.Uint("l", 0, `Loop animation n times
+        When -l=0 (the default), animation is looped indefinitely. Supersedes -s
+        Only applies to multi-frame gifs`)
+	loopSeconds := flag.Uint("s", 0, `Loop animation n seconds
+        When -s=0 (the default), this option is ignored.
+        Only applies to multi-frame gifs`)
 
 	flag.Usage = func() {
-		fmt.Fprint(os.Stderr, `Usage: gotermimg [-u|-x=n|-y=n] [IMAGEFILE]
+		fmt.Fprint(os.Stderr, `Usage: gotermimg [-u] [-x=n] [-y=n] [-l=n|-s=n] [IMAGEFILE]
   IMAGEFILE - png, gif or jpg.  gif will auto-play.
   Image data can be piped to stdin instead of providing IMAGEFILE.
+
   If neither -x or -y are provided, and the image is larger than your current
   terminal, it will be automatically scaled to fit.
 
@@ -118,7 +125,18 @@ func main() {
 		}
 
 		if len(gifimg.Image) > 1 {
-			timg.PrintAnimation(timg.Gif(gifimg, conv, trans))
+			var loop timg.KeepLooping
+			switch {
+			// Don't bother looping if we're not outputting to a tty
+			case !termutil.Isatty(os.Stdout.Fd()):
+				loop = timg.LoopTimes(1)
+			case *loopTimes > 0:
+				loop = timg.LoopTimes(*loopTimes)
+			case *loopSeconds > 0:
+				loop = timg.LoopSeconds(*loopSeconds)
+			}
+
+			timg.PrintAnimation(timg.Gif(gifimg, conv, trans), loop)
 		} else {
 			timg.PrintImage(gifimg.Image[0], conv, trans)
 		}
