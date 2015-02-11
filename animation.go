@@ -2,10 +2,10 @@ package gotermimg
 
 import (
 	"fmt"
-	"image/gif"
 	"time"
 
 	"github.com/moshen/gotermimg/terminal"
+	"github.com/moshen/gotermimg/vendor/gif"
 )
 
 // Defines a frame of an Animation
@@ -21,7 +21,7 @@ type Animation []Frame
 func Gif(g *gif.GIF, conv Converter, trans Transformer) Animation {
 	giflen := len(g.Image)
 	ani := make(Animation, giflen, giflen)
-	for i, v := range g.Image {
+	for i, v := range g.Explode() {
 		ani[i] = Frame{conv(v, trans), time.Duration(g.Delay[i]) * 10 * time.Millisecond}
 	}
 

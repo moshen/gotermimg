@@ -6,12 +6,12 @@ import (
 	"encoding/base64"
 	"flag"
 	"fmt"
-	"image/gif"
 	"log"
 	"os"
 	"regexp"
 
 	timg "github.com/moshen/gotermimg"
+	"github.com/moshen/gotermimg/vendor/gif"
 )
 
 const (

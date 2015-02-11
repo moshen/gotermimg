@@ -5,7 +5,6 @@ import (
 	"flag"
 	"fmt"
 	"image"
-	"image/gif"
 	_ "image/jpeg"
 	_ "image/png"
 	"io/ioutil"
@@ -14,6 +13,7 @@ import (
 
 	timg "github.com/moshen/gotermimg"
 	"github.com/moshen/gotermimg/terminal"
+	"github.com/moshen/gotermimg/vendor/gif"
 	"github.com/moshen/gotermimg/vendor/termutil"
 )
 
