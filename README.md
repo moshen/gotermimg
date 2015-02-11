@@ -59,6 +59,10 @@ Installs the `gotermimg` and `gogopher` command line applications.
 
 [Colin Kennedy](https://github.com/moshen)
 
+### vendor/gif
+
+[Go AUTHORS](https://golang.org/AUTHORS)
+
 ### vendor/resize
 
 [Jan Schlicht](https://github.com/nfnt/resize)
@@ -75,6 +79,10 @@ Installs the `gotermimg` and `gogopher` command line applications.
 The Go gopher was designed by Renee French. (http://reneefrench.blogspot.com/)
 The design is licensed under the Creative Commons 3.0 Attributions license.
 Read this article for more details: http://blog.golang.org/gopher
+
+### vendor/gif
+
+[BSD](https://github.com/moshen/gotermimg/blob/master/vendor/gif/LICENSE)
 
 ### vendor/resize
 
