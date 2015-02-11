@@ -1,5 +1,6 @@
 
 # gotermimg
+[![Build Status](https://travis-ci.org/moshen/gotermimg.svg?branch=master)](https://travis-ci.org/moshen/gotermimg)
 
 Something hacked together to display images and play gifs in 256 color
 terminals.  I have
