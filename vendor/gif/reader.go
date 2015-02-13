@@ -463,21 +463,15 @@ func (g *GIF) Explode() []*image.RGBA {
 	lastNpd := 0 // The last non-previous disposal Image index
 	imageBounds := image.Rect(0, 0, g.Config.Width, g.Config.Height)
 
-	fillIn := func(img *image.RGBA, c color.Color) {
-		for y := imageBounds.Min.Y; y < imageBounds.Max.Y; y++ {
-			for x := imageBounds.Min.X; x < imageBounds.Max.X; x++ {
-				img.Set(x, y, c)
-			}
-		}
-	}
-
 	drawOverBg := func(img image.Image) *image.RGBA {
 		newimg := image.NewRGBA(imageBounds)
+		var c color.Color
 		if g.BackgroundIndex >= 0 {
-			fillIn(newimg, g.Config.ColorModel.(color.Palette)[g.BackgroundIndex])
+			c = g.Config.ColorModel.(color.Palette)[g.BackgroundIndex]
 		} else {
-			fillIn(newimg, color.Transparent)
+			c = color.Transparent
 		}
+		draw.Draw(newimg, imageBounds, &image.Uniform{c}, imageBounds.Min, draw.Src)
 		b := img.Bounds()
 		draw.Draw(newimg, b, img, b.Min, draw.Over)
 		return newimg
