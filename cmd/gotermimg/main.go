@@ -94,6 +94,8 @@ func main() {
 			log.Fatal(err)
 		}
 
+		y = y - 1
+
 		// Convert the actual terminal dimensions into effective dimensions
 		switch {
 		case *isUTF8:
@@ -104,17 +106,15 @@ func main() {
 			x = (x - 1) / 2
 		}
 
-		switch {
-		case uint(conf.Width) > x && uint(conf.Height) > y:
-			if conf.Width > conf.Height {
-				trans = timg.Resize(0, y)
-			} else {
+		if uint(conf.Width) > x || uint(conf.Height) > y {
+			aspectTerm := float32(x) / float32(y)
+			aspectImg := float32(conf.Width) / float32(conf.Height)
+
+			if aspectImg > aspectTerm {
 				trans = timg.Resize(x, 0)
+			} else {
+				trans = timg.Resize(0, y)
 			}
-		case uint(conf.Width) > x:
-			trans = timg.Resize(x, 0)
-		case uint(conf.Height) > y:
-			trans = timg.Resize(0, y)
 		}
 	}
 
