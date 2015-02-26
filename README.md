@@ -48,6 +48,11 @@ Installs the `gotermimg` and `gogopher` command line applications.
 
 [![gotermimg on an animated gif with transparency](http://zippy.gfycat.com/IcyBlindBlesbok.gif)](http://gfycat.com/IcyBlindBlesbok)
 
+While the render speed on some slower terminals might not look very good, urxvt
+looks amazing.
+
+[![gotermimg on urxvt](http://giant.gfycat.com/GrossHiddenKronosaurus.gif)](http://gfycat.com/GrossHiddenKronosaurus)
+
 ### gogopher
 
     Usage: gogopher [-u]
