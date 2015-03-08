@@ -53,13 +53,11 @@ looks amazing (click through for HQ).
 
 [![gotermimg on urxvt](http://giant.gfycat.com/ShamefulGrayHoatzin.gif)](http://gfycat.com/GrossHiddenKronosaurus)
 
-### gogopher
+Get a shifty gopher:
 
-    Usage: gogopher [-u]
-    Prints a looping animation of the Go gopher looking shifty!
-      -u=false: Enable UTF8 output
-
-[![gogopher printing a shify go gopher](http://zippy.gfycat.com/ConsciousTimelyHuman.gif)](http://gfycat.com/ConsciousTimelyHuman)
+```bash
+curl http://zippy.gfycat.com/FlippantAccurateHaddock.gif | gotermimg
+```
 
 ## Author
 
