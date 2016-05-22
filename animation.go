@@ -4,8 +4,10 @@ import (
 	"fmt"
 	"time"
 
+	// Vendor
+	"gif"
+
 	"github.com/moshen/gotermimg/terminal"
-	"github.com/moshen/gotermimg/vendor/gif"
 )
 
 // Defines a frame of an Animation

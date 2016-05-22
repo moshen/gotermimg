@@ -3,7 +3,8 @@ package gotermimg
 import (
 	"image"
 
-	"github.com/moshen/gotermimg/vendor/resize"
+	// Vendor
+	"resize"
 )
 
 type Transformer func(image.Image) image.Image

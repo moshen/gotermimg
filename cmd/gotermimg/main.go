@@ -11,10 +11,12 @@ import (
 	"log"
 	"os"
 
+	// Vendor
+	"gif"
+	"termutil"
+
 	timg "github.com/moshen/gotermimg"
 	"github.com/moshen/gotermimg/terminal"
-	"github.com/moshen/gotermimg/vendor/gif"
-	"github.com/moshen/gotermimg/vendor/termutil"
 )
 
 func main() {
