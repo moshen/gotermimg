@@ -29,12 +29,12 @@ func colorize(fb uint8, i ColorCode, s string) string {
 	return fmt.Sprintf("\033[%d;5;%dm%s", fb, i, s)
 }
 
-// Returns string s with ColorCode i applied to the foreground
+// Fg returns string s with ColorCode i applied to the foreground
 func Fg(i ColorCode, s string) string {
 	return colorize(fgCode, i, s)
 }
 
-// Returns string s with ColorCode i applied to the background
+// Bg returns string s with ColorCode i applied to the background
 func Bg(i ColorCode, s string) string {
 	return colorize(bgCode, i, s)
 }
@@ -57,7 +57,7 @@ type winsize struct {
 	ypixels uint16
 }
 
-// Returns the size of the tty referenced by the provided file descriptor
+// Size returns the size of the tty referenced by the provided file descriptor
 func Size(fd uintptr) (uint, uint, error) {
 	var sz winsize
 	_, _, err := syscall.Syscall(syscall.SYS_IOCTL,

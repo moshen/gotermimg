@@ -32,7 +32,7 @@ func Gif(g *gif.GIF, conv Converter, trans Transformer) Animation {
 
 type KeepLooping func() bool
 
-// Returns true until n calls have been made
+// LoopTimes returns true until n calls have been made
 func LoopTimes(n uint) KeepLooping {
 	loopCount := uint(0)
 	return func() bool {
@@ -48,7 +48,7 @@ func LoopTimes(n uint) KeepLooping {
 	}
 }
 
-// Returns true until s seconds have elapsed
+// LoopSeconds returns true until s seconds have elapsed
 func LoopSeconds(s uint) KeepLooping {
 	var c <-chan time.Time
 	return func() bool {
