@@ -15,7 +15,7 @@ Install using `go get`:
 
     go get github.com/moshen/gotermimg/...
 
-Installs the `gotermimg` and `gogopher` command line applications.
+Installs the `gotermimg` command line application.
 
 ## Usage
 
@@ -44,20 +44,14 @@ Installs the `gotermimg` and `gogopher` command line applications.
             For example if -x is provided without -y, height is scaled to
             maintain aspect ratio
 
-[![gotermimg on a png with transparency](http://fat.gfycat.com/AbsoluteShockingHerring.gif)](http://gfycat.com/AbsoluteShockingHerring)
+[![gotermimg on a png with transparency](https://media.giphy.com/media/vpYeVwn2cRxstBp5hS/giphy.gif)](https://media.giphy.com/media/vpYeVwn2cRxstBp5hS/giphy.gif)
 
-[![gotermimg on an animated gif with transparency](http://zippy.gfycat.com/IcyBlindBlesbok.gif)](http://gfycat.com/IcyBlindBlesbok)
+[![gotermimg on an animated gif with transparency](https://media.giphy.com/media/b9sXmD1dWBUvbgr87r/giphy.gif)](https://media.giphy.com/media/b9sXmD1dWBUvbgr87r/giphy.gif)
 
 While the render speed on some slower terminals might not look very good, urxvt
 looks amazing (click through for HQ).
 
-[![gotermimg on urxvt](http://giant.gfycat.com/ShamefulGrayHoatzin.gif)](http://gfycat.com/GrossHiddenKronosaurus)
-
-Get a shifty gopher:
-
-```bash
-curl http://zippy.gfycat.com/FlippantAccurateHaddock.gif | gotermimg
-```
+[![gotermimg on urxvt](https://media.giphy.com/media/Jsg9KArYyntBPgoH4o/giphy.gif)](https://media.giphy.com/media/Jsg9KArYyntBPgoH4o/giphy.gif)
 
 ## Author
 
