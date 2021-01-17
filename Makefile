@@ -7,7 +7,7 @@ SAFERM := saferm () { for f in "$$@"; do ([[ -e "$$f" ]] && rm "$$f"); done; ret
 all: $(ALL) 
 
 gotermimg:
-	go build ./cmd/gotermimg
+	go build -mod vendor ./cmd/gotermimg
 
 clean:
 	go clean -r -i
