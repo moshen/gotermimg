@@ -1,6 +1,6 @@
 
 # gotermimg
-![Build Status](https://github.com/moshen/gotermimg/workflows/CI/badge.svg?branch=master)
+![Build Status](https://github.com/moshen/gotermimg/actions/workflows/main.yml/badge.svg?branch=master)
 
 Something hacked together to display images and play gifs in 256 color
 terminals.  I have
